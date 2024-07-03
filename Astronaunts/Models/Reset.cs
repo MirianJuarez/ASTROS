@@ -1,0 +1,1 @@
+Esto es un reset para el Head para pasar del staging area

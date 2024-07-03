@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>El Número de astronautas en el espacio se mostrará abajo:</h1>
+<button id="fetchButton">Obtener datos</button>
+
+<div id="astronautData">
+    <p>Presiona el botón para obtener la información de los astronautas.</p>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#fetchButton').click(function () {
+                $.ajax({
+                    url: '@Url.Action("GetAstronautData", "Home")',
+                    method: 'GET',
+                    success: function (data) {
+                        let astronauts = JSON.parse(data);
+                        let astronautList = astronauts.people.map(a => a.name).join(", ");
+                        let displayData = `<p>Hay ${astronauts.number} astronautas en el espacio: ${astronautList}</p>`;
+                        $('#astronautData').html(displayData);
+                    },
+                    error: function () {
+                        $('#astronautData').html('<p>Ocurrió un error al obtener los datos.</p>');
+                    }
+                });
+            });
+        });
+    </script>
+}
