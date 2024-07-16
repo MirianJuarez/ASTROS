@@ -1,1 +1,2 @@
 nueva linea modificado segunda parte
+aplicacion de git pull para actualizar repo local 
